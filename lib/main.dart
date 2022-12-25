@@ -35,17 +35,17 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _filters = filterData;
       // keep the true values of the givin filters only and skip the remaining
-      _availableMeals = _availableMeals.where((meal) {
-        if (filterData.gluten && !meal.isGlutenFree) {
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (_filters.gluten && !meal.isGlutenFree) {
           return false;
         }
-        if (filterData.lactose && !meal.isLactoseFree) {
+        if (_filters.lactose && !meal.isLactoseFree) {
           return false;
         }
-        if (filterData.vegetarian && !meal.isVegetarian) {
+        if (_filters.vegetarian && !meal.isVegetarian) {
           return false;
         }
-        if (filterData.vegan && !meal.isVegan) {
+        if (_filters.vegan && !meal.isVegan) {
           return false;
         }
         return true;
@@ -80,6 +80,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Meals',
       theme: ThemeData(
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
